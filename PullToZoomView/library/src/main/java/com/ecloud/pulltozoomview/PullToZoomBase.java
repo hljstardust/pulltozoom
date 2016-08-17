@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -15,16 +16,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 /**
- * Author:    ZhuWenWu
- * Version    V1.0
- * Date:      2014/11/7  14:18.
- * Description:
- * Modification  History:
- * Date         	Author        		Version        	Description
- * -----------------------------------------------------------------------------------
- * 2014/11/7        ZhuWenWu            1.0                    1.0
- * Why & What is modified:
- */
+*下拉缩放
+*@author yangliqiang
+*@date 2016/8/16
+*/
 public abstract class PullToZoomBase<T extends View> extends LinearLayout implements IPullToZoom<T> {
     private static final float FRICTION = 2.0f;
     protected T mRootView;
@@ -35,7 +30,7 @@ public abstract class PullToZoomBase<T extends View> extends LinearLayout implem
     protected int mScreenWidth;
 
     private boolean isZoomEnabled = true;
-    private boolean isParallax = true;
+    private boolean isParallax = false;
     private boolean isZooming = false;
     private boolean isHideHeader = false;
 
@@ -87,13 +82,25 @@ public abstract class PullToZoomBase<T extends View> extends LinearLayout implem
                 mHeaderView = mLayoutInflater.inflate(headerViewResId, null, false);
             }
 
-            isParallax = a.getBoolean(R.styleable.PullToZoomView_isHeaderParallax, true);
+            isParallax = a.getBoolean(R.styleable.PullToZoomView_isHeaderParallax, false);
 
             // Let the derivative classes have a go at handling attributes, then
             // recycle them...
             handleStyledAttributes(a);
             a.recycle();
         }
+
+        mRootView.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                //解决先上滑再下拉无法缩放图片问题
+                if(MotionEvent.ACTION_MOVE == event.getAction() && isReadyForPullStart()){
+                    PullToZoomBase.this.requestDisallowInterceptTouchEvent(false);
+                }
+
+                return false;
+            }
+        });
         addView(mRootView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
     }
 
@@ -279,8 +286,8 @@ public abstract class PullToZoomBase<T extends View> extends LinearLayout implem
     protected abstract boolean isReadyForPullStart();
 
     public interface OnPullZoomListener {
-        public void onPullZooming(int newScrollValue);
+        void onPullZooming(int newScrollValue);
 
-        public void onPullZoomEnd();
+        void onPullZoomEnd();
     }
 }

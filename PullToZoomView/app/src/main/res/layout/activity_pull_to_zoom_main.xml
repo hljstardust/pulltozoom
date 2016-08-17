@@ -13,36 +13,43 @@
     <Button
         android:id="@+id/btn_list"
         style="?android:attr/buttonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="142dp"
-        android:text="Zoom List View"
+        android:text="ListView"
         android:textSize="22sp" />
 
     <Button
         android:id="@+id/btn_scroll"
         style="?android:attr/buttonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_list"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="83dp"
-        android:text="Zoom Scroll View"
+        android:text="ScrollView"
         android:textSize="22sp" />
 
+    <Button
+        android:id="@+id/btn_grid_view"
+        style="?android:attr/buttonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_scroll"
+        android:layout_centerHorizontal="true"
+        android:text="GridView"
+        android:textSize="22sp" />
 
     <Button
         android:id="@+id/btn_recycler_view"
         style="?android:attr/buttonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_scroll"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="83dp"
-        android:text="Zoom Recycler View"
+        android:text="RecyclerView"
         android:textSize="22sp" />
+
 
 
 </LinearLayout>

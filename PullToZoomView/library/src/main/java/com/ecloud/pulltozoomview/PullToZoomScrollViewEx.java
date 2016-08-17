@@ -14,16 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 /**
- * Author:    ZhuWenWu
- * Version    V1.0
- * Date:      2014/11/10  14:25.
- * Description:
- * Modification  History:
- * Date         	Author        		Version        	Description
- * -----------------------------------------------------------------------------------
- * 2014/11/10        ZhuWenWu            1.0                    1.0
- * Why & What is modified:
- */
+*下拉缩放ScrollView
+*@author yangliqiang
+*@date 2016/8/16
+*/
 public class PullToZoomScrollViewEx extends PullToZoomBase<ScrollView> {
     private static final String TAG = PullToZoomScrollViewEx.class.getSimpleName();
     private boolean isCustomHeaderHeight = false;
@@ -309,6 +303,6 @@ public class PullToZoomScrollViewEx extends PullToZoomBase<ScrollView> {
     }
 
     protected interface OnScrollViewChangedListener {
-        public void onInternalScrollChanged(int left, int top, int oldLeft, int oldTop);
+        void onInternalScrollChanged(int left, int top, int oldLeft, int oldTop);
     }
 }

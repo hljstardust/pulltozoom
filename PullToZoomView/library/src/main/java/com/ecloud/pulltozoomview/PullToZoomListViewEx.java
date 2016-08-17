@@ -16,21 +16,16 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 /**
- * Author:    ZhuWenWu
- * Version    V1.0
- * Date:      2014/11/7  18:01.
- * Description:
- * Modification  History:
- * Date         	Author        		Version        	Description
- * -----------------------------------------------------------------------------------
- * 2014/11/7        ZhuWenWu            1.0                    1.0
- * Why & What is modified:
- */
+*下拉缩放listview
+*@author yangliqiang
+*@date 2016/8/16
+*/
 public class PullToZoomListViewEx extends PullToZoomBase<ListView> implements AbsListView.OnScrollListener {
     private static final String TAG = PullToZoomListViewEx.class.getSimpleName();
     private FrameLayout mHeaderContainer;
     private int mHeaderHeight;
     private ScalingRunnable mScalingRunnable;
+    private AbsListView.OnScrollListener mOnScrollListener;
 
     private static final Interpolator sInterpolator = new Interpolator() {
         public float getInterpolation(float paramAnonymousFloat) {
@@ -113,6 +108,10 @@ public class PullToZoomListViewEx extends PullToZoomBase<ListView> implements Ab
 
     public void setOnItemClickListener(AdapterView.OnItemClickListener listener) {
         mRootView.setOnItemClickListener(listener);
+    }
+
+    public void setOnScrollListener(AbsListView.OnScrollListener scrollListener){
+        this.mOnScrollListener = scrollListener;
     }
 
     @Override
@@ -224,15 +223,17 @@ public class PullToZoomListViewEx extends PullToZoomBase<ListView> implements Ab
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        Log.d(TAG, "onScrollStateChanged --> ");
+        if(mOnScrollListener != null){
+            mOnScrollListener.onScrollStateChanged(view, scrollState);
+        }
     }
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (mZoomView != null && !isHideHeader() && isPullToZoomEnabled()) {
             float f = mHeaderHeight - mHeaderContainer.getBottom();
-            Log.d(TAG, "onScroll --> f = " + f);
             if (isParallax()) {
+                Log.d(TAG, "onScroll --> f = " + f);
                 if ((f > 0.0F) && (f < mHeaderHeight)) {
                     int i = (int) (0.65D * f);
                     mHeaderContainer.scrollTo(0, -i);
@@ -240,6 +241,10 @@ public class PullToZoomListViewEx extends PullToZoomBase<ListView> implements Ab
                     mHeaderContainer.scrollTo(0, 0);
                 }
             }
+        }
+
+        if(mOnScrollListener != null){
+            mOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
         }
     }
 

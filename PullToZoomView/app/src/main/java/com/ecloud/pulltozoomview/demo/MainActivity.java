@@ -9,13 +9,17 @@ import android.view.View;
 
 import com.ecloud.pulltozoomview.demo.recyclerview.PullToZoomRecyclerActivity;
 
-
+/**
+*下拉缩放示例
+*@author yangliqiang
+*@date 2016/8/16
+*/
 public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_pull_to_zoom_main);
 
         findViewById(R.id.btn_list).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +39,13 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, PullToZoomRecyclerActivity.class));
+            }
+        });
+
+        findViewById(R.id.btn_grid_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, PullToZoomGridViewActivity.class));
             }
         });
     }

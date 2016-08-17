@@ -13,16 +13,10 @@ import android.widget.LinearLayout;
 import com.ecloud.pulltozoomview.PullToZoomScrollViewEx;
 
 /**
- * Author:    ZhuWenWu
- * Version    V1.0
- * Date:      2014/9/4  17:30.
- * Description:
- * Modification  History:
- * Date         	Author        		Version        	Description
- * -----------------------------------------------------------------------------------
- * 2014/9/4        ZhuWenWu            1.0                    1.0
- * Why & What is modified:
- */
+*
+*@author yangliqiang
+*@date 2016/8/16
+*/
 public class PullToZoomScrollActivity extends ActionBarActivity {
 
     private PullToZoomScrollViewEx scrollView;
@@ -37,21 +31,21 @@ public class PullToZoomScrollActivity extends ActionBarActivity {
         scrollView.getPullRootView().findViewById(R.id.tv_test1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("zhuwenwu", "onClick -->");
+                Log.e("ylq", "onClick -->");
             }
         });
 
         scrollView.getPullRootView().findViewById(R.id.tv_test2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("zhuwenwu", "onClick -->");
+                Log.e("ylq", "onClick -->");
             }
         });
 
         scrollView.getPullRootView().findViewById(R.id.tv_test3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("zhuwenwu", "onClick -->");
+                Log.e("ylq", "onClick -->");
             }
         });
         DisplayMetrics localDisplayMetrics = new DisplayMetrics();
